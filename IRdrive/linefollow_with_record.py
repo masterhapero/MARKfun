@@ -26,20 +26,20 @@ utime.sleep_ms(2000)
 value5 = Line_Finder(5, 1)
 value6 = Line_Finder(6, 1)
 
-v = video.open("/sd/capture.avi", audio = False, record=1, interval=200000, quality=50)
-okay_to_record = False
+v = video.open("/sd/capture.avi", audio = False, record=1, interval=40000, quality=50)
+#okay_to_record = False
 
 while value5 or value6:
     img = sensor.snapshot()
     lcd.display(img)
     if value5 and value6:
         Maix_motor.motor_run(25,25,0)
-        if okay_to_record:
-            # This takes longer, try do it in clear
-            v.record(img)
-        else:
-            utime.sleep_ms(40)
-        okay_to_record = True
+        #if okay_to_record:
+        #    # This takes longer, try do it in clear
+        #    v.record(img)
+        #else:
+        #    utime.sleep_ms(40)
+        # okay_to_record = True
         #Maix_motor.motor_motion(1, 1, 0)
     else:
         okay_to_record = False
@@ -47,7 +47,9 @@ while value5 or value6:
             Maix_motor.motor_run(0,25,0)
         if value6:
             Maix_motor.motor_run(25,0,0)
-        utime.sleep_ms(40)
+        # utime.sleep_ms(40)
+
+    v.record(img)
     value5 = Line_Finder(5, 1)
     value6 = Line_Finder(6, 1)
 
